@@ -1,0 +1,251 @@
+
+<OMTF version="0x00020005">
+
+  <Event iEvent="44" iMixedEvent="0">
+    <bx iBx="88">
+      <Processor iProcessor="0"/>
+      <Processor iProcessor="1"/>
+      <Processor iProcessor="2"/>
+      <Processor iProcessor="3"/>
+      <Processor iProcessor="4">
+        <Layer iLayer="2">
+          <Hit iEta="78" iInput="4" iPhi="831"/>
+        </Layer>
+        <Layer iLayer="3">
+          <Hit iEta="78" iInput="4" iPhi="-28"/>
+        </Layer>
+        <Layer iLayer="4">
+          <Hit iEta="78" iInput="4" iPhi="824"/>
+        </Layer>
+        <Layer iLayer="5">
+          <Hit iEta="78" iInput="4" iPhi="-18"/>
+        </Layer>
+        <Layer iLayer="11">
+          <Hit iEta="82" iInput="8" iPhi="837"/>
+        </Layer>
+        <Layer iLayer="12">
+          <Hit iEta="76" iInput="8" iPhi="831"/>
+        </Layer>
+        <Layer iLayer="13">
+          <Hit iEta="79" iInput="8" iPhi="829"/>
+        </Layer>
+        <Layer iLayer="14">
+          <Hit iEta="78" iInput="4" iPhi="824"/>
+        </Layer>
+        <AlgoMuon charge="1" disc="343" etaCode="78" iRefHit="0" iRefLayer="2" layers="000111100000111100" nHits="6" phiCode="831" phiRHit="831" ptCode="33"/>
+        <AlgoMuon charge="1" disc="368" etaCode="78" iRefHit="1" iRefLayer="5" layers="000111100000111100" nHits="6" phiCode="830" phiRHit="824" ptCode="37"/>
+        <AlgoMuon charge="1" disc="294" etaCode="82" iRefHit="2" iRefLayer="7" layers="000111100000111100" nHits="6" phiCode="831" phiRHit="837" ptCode="37"/>
+      </Processor>
+      <Processor iProcessor="5">
+        <Layer iLayer="2">
+          <Hit iEta="78" iInput="0" iPhi="-69"/>
+        </Layer>
+        <Layer iLayer="3">
+          <Hit iEta="78" iInput="0" iPhi="-28"/>
+        </Layer>
+        <Layer iLayer="4">
+          <Hit iEta="78" iInput="0" iPhi="-76"/>
+        </Layer>
+        <Layer iLayer="5">
+          <Hit iEta="78" iInput="0" iPhi="-18"/>
+        </Layer>
+        <Layer iLayer="11">
+          <Hit iEta="82" iInput="0" iPhi="-63"/>
+        </Layer>
+        <Layer iLayer="12">
+          <Hit iEta="76" iInput="0" iPhi="-69"/>
+        </Layer>
+        <Layer iLayer="13">
+          <Hit iEta="79" iInput="0" iPhi="-70"/>
+        </Layer>
+        <Layer iLayer="14">
+          <Hit iEta="78" iInput="0" iPhi="-76"/>
+        </Layer>
+      </Processor>
+      <Processor iProcessor="0"/>
+      <Processor iProcessor="1"/>
+      <Processor iProcessor="2"/>
+      <Processor iProcessor="3"/>
+      <Processor iProcessor="4"/>
+      <Processor iProcessor="5"/>
+    </bx>
+  </Event>
+
+  <Event iEvent="52" iMixedEvent="0">
+    <bx iBx="104">
+      <Processor iProcessor="0">
+        <Layer iLayer="0">
+          <Hit iEta="90" iInput="0" iPhi="-309"/>
+        </Layer>
+        <Layer iLayer="1">
+          <Hit iEta="90" iInput="0" iPhi="-37"/>
+        </Layer>
+        <Layer iLayer="2">
+          <Hit iEta="83" iInput="0" iPhi="-319"/>
+        </Layer>
+        <Layer iLayer="3">
+          <Hit iEta="83" iInput="0" iPhi="-23"/>
+        </Layer>
+        <Layer iLayer="4">
+          <Hit iEta="82" iInput="0" iPhi="-325"/>
+        </Layer>
+        <Layer iLayer="5">
+          <Hit iEta="82" iInput="0" iPhi="-13"/>
+        </Layer>
+        <Layer iLayer="10">
+          <Hit iEta="89" iInput="0" iPhi="-306"/>
+        </Layer>
+        <Layer iLayer="12">
+          <Hit iEta="77" iInput="0" iPhi="-320"/>
+        </Layer>
+        <Layer iLayer="13">
+          <Hit iEta="80" iInput="0" iPhi="-324"/>
+        </Layer>
+        <Layer iLayer="14">
+          <Hit iEta="79" iInput="0" iPhi="-323"/>
+        </Layer>
+      </Processor>
+      <Processor iProcessor="1"/>
+      <Processor iProcessor="2"/>
+      <Processor iProcessor="3"/>
+      <Processor iProcessor="4"/>
+      <Processor iProcessor="5">
+        <Layer iLayer="0">
+          <Hit iEta="90" iInput="4" iPhi="591"/>
+        </Layer>
+        <Layer iLayer="1">
+          <Hit iEta="90" iInput="4" iPhi="-37"/>
+        </Layer>
+        <Layer iLayer="2">
+          <Hit iEta="83" iInput="4" iPhi="581"/>
+        </Layer>
+        <Layer iLayer="3">
+          <Hit iEta="83" iInput="4" iPhi="-23"/>
+        </Layer>
+        <Layer iLayer="4">
+          <Hit iEta="82" iInput="4" iPhi="575"/>
+        </Layer>
+        <Layer iLayer="5">
+          <Hit iEta="82" iInput="4" iPhi="-13"/>
+        </Layer>
+        <Layer iLayer="10">
+          <Hit iEta="89" iInput="8" iPhi="594"/>
+        </Layer>
+        <Layer iLayer="12">
+          <Hit iEta="77" iInput="8" iPhi="579"/>
+        </Layer>
+        <Layer iLayer="13">
+          <Hit iEta="80" iInput="8" iPhi="575"/>
+        </Layer>
+        <Layer iLayer="14">
+          <Hit iEta="79" iInput="4" iPhi="577"/>
+        </Layer>
+        <AlgoMuon charge="1" disc="340" etaCode="90" iRefHit="0" iRefLayer="0" layers="000111010000111111" nHits="7" phiCode="580" phiRHit="591" ptCode="33"/>
+        <AlgoMuon charge="1" disc="394" etaCode="83" iRefHit="1" iRefLayer="2" layers="000111010000111111" nHits="7" phiCode="581" phiRHit="581" ptCode="37"/>
+        <AlgoMuon charge="1" disc="403" etaCode="82" iRefHit="2" iRefLayer="5" layers="000111010000111111" nHits="7" phiCode="581" phiRHit="575" ptCode="41"/>
+        <AlgoMuon charge="1" disc="312" etaCode="89" iRefHit="3" iRefLayer="6" layers="000111010000111111" nHits="7" phiCode="584" phiRHit="594" ptCode="37"/>
+      </Processor>
+      <Processor iProcessor="0"/>
+      <Processor iProcessor="1"/>
+      <Processor iProcessor="2"/>
+      <Processor iProcessor="3"/>
+      <Processor iProcessor="4"/>
+      <Processor iProcessor="5"/>
+    </bx>
+  </Event>
+
+  <Event iEvent="64" iMixedEvent="0">
+    <bx iBx="128">
+      <Processor iProcessor="0"/>
+      <Processor iProcessor="1"/>
+      <Processor iProcessor="2">
+        <Layer iLayer="0">
+          <Hit iEta="85" iInput="4" iPhi="872"/>
+        </Layer>
+        <Layer iLayer="1">
+          <Hit iEta="85" iInput="4" iPhi="-30"/>
+        </Layer>
+        <Layer iLayer="10">
+          <Hit iEta="87" iInput="8" iPhi="870"/>
+        </Layer>
+        <Layer iLayer="11">
+          <Hit iEta="82" iInput="8" iPhi="869"/>
+        </Layer>
+        <Layer iLayer="14">
+          <Hit iEta="78" iInput="4" iPhi="858"/>
+        </Layer>
+        <AlgoMuon charge="1" disc="209" etaCode="85" iRefHit="0" iRefLayer="0" layers="000100110000000011" nHits="4" phiCode="864" phiRHit="872" ptCode="41"/>
+        <AlgoMuon charge="1" disc="193" etaCode="87" iRefHit="1" iRefLayer="6" layers="000100110000000011" nHits="4" phiCode="863" phiRHit="870" ptCode="51"/>
+        <AlgoMuon charge="1" disc="217" etaCode="82" iRefHit="2" iRefLayer="7" layers="000100110000000011" nHits="4" phiCode="863" phiRHit="869" ptCode="41"/>
+      </Processor>
+      <Processor iProcessor="3">
+        <Layer iLayer="0">
+          <Hit iEta="85" iInput="0" iPhi="-28"/>
+        </Layer>
+        <Layer iLayer="1">
+          <Hit iEta="85" iInput="0" iPhi="-30"/>
+        </Layer>
+        <Layer iLayer="10">
+          <Hit iEta="87" iInput="0" iPhi="-29"/>
+        </Layer>
+        <Layer iLayer="11">
+          <Hit iEta="82" iInput="0" iPhi="-31"/>
+        </Layer>
+        <Layer iLayer="14">
+          <Hit iEta="78" iInput="0" iPhi="-42"/>
+        </Layer>
+      </Processor>
+      <Processor iProcessor="4"/>
+      <Processor iProcessor="5"/>
+      <Processor iProcessor="0"/>
+      <Processor iProcessor="1"/>
+      <Processor iProcessor="2"/>
+      <Processor iProcessor="3"/>
+      <Processor iProcessor="4"/>
+      <Processor iProcessor="5"/>
+    </bx>
+  </Event>
+
+  <Event iEvent="99" iMixedEvent="0">
+    <bx iBx="198">
+      <Processor iProcessor="0"/>
+      <Processor iProcessor="1">
+        <Layer iLayer="2">
+          <Hit iEta="78" iInput="2" iPhi="140"/>
+        </Layer>
+        <Layer iLayer="3">
+          <Hit iEta="78" iInput="2" iPhi="-29"/>
+        </Layer>
+        <Layer iLayer="4">
+          <Hit iEta="82" iInput="2" iPhi="131"/>
+        </Layer>
+        <Layer iLayer="5">
+          <Hit iEta="82" iInput="2" iPhi="-20"/>
+        </Layer>
+        <Layer iLayer="11">
+          <Hit iEta="83" iInput="4" iPhi="150"/>
+        </Layer>
+        <Layer iLayer="13">
+          <Hit iEta="80" iInput="4" iPhi="140"/>
+        </Layer>
+        <Layer iLayer="14">
+          <Hit iEta="79" iInput="2" iPhi="134"/>
+        </Layer>
+        <AlgoMuon charge="1" disc="280" etaCode="78" iRefHit="0" iRefLayer="2" layers="000110100000111100" nHits="5" phiCode="140" phiRHit="140" ptCode="29"/>
+        <AlgoMuon charge="1" disc="297" etaCode="82" iRefHit="1" iRefLayer="5" layers="000110100000111100" nHits="5" phiCode="138" phiRHit="131" ptCode="29"/>
+        <AlgoMuon charge="1" disc="247" etaCode="83" iRefHit="2" iRefLayer="7" layers="000110100000111100" nHits="5" phiCode="142" phiRHit="150" ptCode="29"/>
+      </Processor>
+      <Processor iProcessor="2"/>
+      <Processor iProcessor="3"/>
+      <Processor iProcessor="4"/>
+      <Processor iProcessor="5"/>
+      <Processor iProcessor="0"/>
+      <Processor iProcessor="1"/>
+      <Processor iProcessor="2"/>
+      <Processor iProcessor="3"/>
+      <Processor iProcessor="4"/>
+      <Processor iProcessor="5"/>
+    </bx>
+  </Event>
+
+</OMTF>
