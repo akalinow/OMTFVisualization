@@ -4,6 +4,8 @@ import xml.etree.ElementTree as ET
 import numpy
 import matplotlib.pyplot as pylab
 
+from scipy.ndimage.interpolation import shift
+
 import Tkinter
 ############################################
 ############################################
@@ -91,43 +93,43 @@ refToLogicLayers = [0,7,2,6,16,4,10,11]
 
 layerToPlot = [0,0,0,0,0,0,2,2,2,2,1,1,1,1,1,3,3,3]
 layerColors = ["b","g","r","c","m","y","b","g","r","c","m","b","g","r","c","b","g","r"]
+layersLabels = ["MB1", "MB1 bend.", "MB2", "MB2 bend.", "MB3", "MB3 bend.", "RPC1in", "RPC1out", "RPC2in", "RPC2out", "RPC3", "CSC ME1.3", "CSC ME2", "CSC ME3", "CSC ME1.2", "RPC E1", "RPC E2", "RPC E3"]
 ############################################
 ############################################
 def plotPtCode(iPt, iCharge, iRefLayer, eventData={}):
 
-    index = (31-iPt)*2+(iCharge==1)
+    iPt = (31-iPt)*2+(iCharge==1)
     
     title = "PtCode = "+str(iPt)+" charge="+str(iCharge)+" ref layer: "+refLayers[iRefLayer]
     print title
  
     f, axarr = pylab.subplots(4,sharex=True,sharey=True,num=title,figsize=(8,12))
 
-    axarr[0].plot(pdf[index,0,iRefLayer],linewidth=5,label="MB1")
-    axarr[0].plot(pdf[index,1,iRefLayer],linewidth=5,label="MB1 dev")
-    axarr[0].plot(pdf[index,2,iRefLayer],linewidth=5,label="MB2")
-    axarr[0].plot(pdf[index,3,iRefLayer],linewidth=5,label="MB2 dev")
-    axarr[0].plot(pdf[index,4,iRefLayer],linewidth=5,label="MB3")
-    axarr[0].plot(pdf[index,5,iRefLayer],linewidth=5,label="MB3 dev")
-    axarr[0].legend(loc='upper right', shadow=False, fontsize='x-large') 
+    ##DT layers
+    for iLayer in xrange(0,6):
+        shiftedPdf = shift(pdf[iPt,iLayer,iRefLayer], meanDistPhi[iPt,iLayer,iRefLayer], cval=0)
+        axarr[0].plot(shiftedPdf,linewidth=5,label=layersLabels[iLayer])
+    axarr[0].legend(loc='upper right', shadow=False, fontsize='x-large')
+
+    #Barrel RPC layers
+    for iLayer in xrange(6,11):
+        shiftedPdf = shift(pdf[iPt,iLayer,iRefLayer], meanDistPhi[iPt,iLayer,iRefLayer], cval=0)
+        axarr[1].plot(shiftedPdf,linewidth=5,label=layersLabels[iLayer])
+    axarr[1].legend(loc='upper right', shadow=False, fontsize='x-large') 
+
+    #CSC layers
+    for iLayer in xrange(11,15):
+        shiftedPdf = shift(pdf[iPt,iLayer,iRefLayer], meanDistPhi[iPt,iLayer,iRefLayer], cval=0)
+        axarr[2].plot(shiftedPdf,linewidth=5,label=layersLabels[iLayer])
+    axarr[2].legend(loc='upper right', shadow=False, fontsize='x-large') 
     
-    axarr[1].plot(pdf[index,10,iRefLayer],linewidth=5,label="RPC1in")
-    axarr[1].plot(pdf[index,11,iRefLayer],linewidth=5,label="RPC1out")
-    axarr[1].plot(pdf[index,12,iRefLayer],linewidth=5,label="RPC2in")
-    axarr[1].plot(pdf[index,13,iRefLayer],linewidth=5,label="RPC2out")
-    axarr[1].plot(pdf[index,14,iRefLayer],linewidth=5,label="RPC3")
-    axarr[1].legend(loc='upper right', shadow=False, fontsize='x-large')    
-
-    axarr[2].plot(pdf[index,6,iRefLayer],linewidth=5,label="CSC ME1.3")
-    axarr[2].plot(pdf[index,7,iRefLayer],linewidth=5,label="CSC ME2")
-    axarr[2].plot(pdf[index,8,iRefLayer],linewidth=5,label="CSC ME3")
-    axarr[2].plot(pdf[index,9,iRefLayer],linewidth=5,label="CSC ME1.2")
-    axarr[2].legend(loc='upper right', shadow=False, fontsize='x-large')  
-
-    axarr[3].plot(pdf[index,15,iRefLayer],linewidth=5,label="RPC E1")
-    axarr[3].plot(pdf[index,16,iRefLayer],linewidth=5,label="RPC E2")
-    axarr[3].plot(pdf[index,17,iRefLayer],linewidth=5,label="RPC E3")
+    #Endcap RPC layers
+    for iLayer in xrange(15,18):
+        shiftedPdf = shift(pdf[iPt,iLayer,iRefLayer], meanDistPhi[iPt,iLayer,iRefLayer], cval=0)
+        axarr[3].plot(shiftedPdf,linewidth=5,label=layersLabels[iLayer])
     axarr[3].legend(loc='upper right', shadow=False, fontsize='x-large') 
     
+
     llh = 0
     if(len(eventData)):
         for iLayer,aHit in eventData.iteritems():
@@ -142,7 +144,6 @@ def plotPtCode(iPt, iCharge, iRefLayer, eventData={}):
                 llh+=pdf[index,int(iLayer),iRefLayer,phi]       
         print "llh: ",llh
     
-
     f.subplots_adjust(hspace=0,left=0.05, right=0.99, top=0.99, bottom=0.05)
     pylab.setp([a.get_xticklabels() for a in f.axes[:-1]], visible=False)
 
@@ -253,14 +254,14 @@ fname = "Patterns.xml"
 nPtCodes = 52
 
 ###Comment this when loading the data from numpy file
-pdf = readPdfFromXML(fname)
-meanDistPhi = readMeanDistPhiFromXML(fname)
-numpy.savez('GPs',pdf,meanDistPhi)
+#pdf = readPdfFromXML(fname)
+#meanDistPhi = readMeanDistPhiFromXML(fname)
+#numpy.savez('GPs',pdf,meanDistPhi)
 ##############################################
 
 ##Uncomment this when loading data from numpy file
-#pdf = numpy.load('GPs.npz')['arr_0']
-#meanDistPhi = numpy.load('GPs.npz')['arr_1']
+pdf = numpy.load('GPs.npz')['arr_0']
+meanDistPhi = numpy.load('GPs.npz')['arr_1']
 ###############################################
 
 ##Uncommnet this is you want to plot reconstructed events on top of the pdf
