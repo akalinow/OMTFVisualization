@@ -10,4 +10,4 @@ Additionaly for plotting the reconstruced events on top of pdf, a event data is 
 
 Running the program:
 
-./test.py
+./plotOMTF.py
