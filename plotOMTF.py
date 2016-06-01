@@ -86,6 +86,47 @@ def parseConnectionsXML(fname):
     return layersNames, refLayersNames
 ############################################
 ############################################
+def readEventFromXML(fname):
+
+    tree = ET.parse(fname)
+    root = tree.getroot()
+
+    events = root.findall("Event")
+
+    nProcessors = 6
+    nLayers = 18
+    nHitsInLayer = 2
+    nCandidates = 3
+    eventData =  numpy.ndarray(shape=(nProcessors, nLayers, nHitsInLayer), dtype=int)
+    candidateData =  numpy.ndarray(shape=(nProcessors, nCandidates), dtype=int)
+    eventData.fill(999)
+
+    for aEvent in events:
+        bx = aEvent.findall("bx")
+        processors = bx[0].findall("Processor")
+        for aProcessor in processors:
+            iProcessor = int(aProcessor.attrib["iProcessor"])
+            layers = aProcessor.findall("Layer")
+            for aLayer in layers:
+                iLayer = int(aLayer.attrib["iLayer"])
+                hits = aLayer.findall("Hit")
+                iHit = 0
+                for aHit in hits:
+                    iPhi = aHit.attrib["iPhi"]
+                    eventData[iProcessor,iLayer,iHit] = iPhi
+                    iHit+=1
+            algoMuons = aProcessor.findall("AlgoMuon")
+            iCandidate = 0
+            for algoMuon in algoMuons:
+                discriminator = algoMuon.attrib["disc"]
+                candidateData[iProcessor,iCandidate] = discriminator
+                
+                    
+        print eventData
+        return
+
+############################################
+############################################
 def getPtCodes(goldenPatterns):
 
     ptCodes = []
@@ -150,16 +191,16 @@ def plotPtCode(iPt, iCharge, iRefLayer):
     iChargeIndex = (iCharge+1)/2
 
     for iLayer in xrange(0,18):
-        if addMeanDitPhi:
+        if addMeanDistPhi:
             shiftedPdf = shift(pdfArray[iPt,iChargeIndex,iLayer,iRefLayer], meanDistPhiArray[iPt,iChargeIndex,iLayer,iRefLayer], cval=0)
         else:
             shiftedPdf = pdfArray[iPt,iChargeIndex,iLayer,iRefLayer]        
         axarr[layerToPlot[iLayer]].plot(shiftedPdf,linewidth=5,label=layersNames[iLayer],drawstyle='steps-mid')
 
     for iPlot in xrange(0,4):
-        axarr[iPlot].legend(loc='upper right', shadow=False, fontsize='x-large')
+        axarr[iPlot].legend(bbox_to_anchor=(1.05, 1),loc='upper left', shadow=False, fontsize='x-large')
     
-    f.subplots_adjust(hspace=0,left=0.05, right=0.99, top=0.99, bottom=0.05)
+    f.subplots_adjust(hspace=0,left=0.05, right=0.7, top=0.99, bottom=0.05)
     pylab.setp([a.get_xticklabels() for a in f.axes[:-1]], visible=False)
 
     fname = "PtCode_"+str(iPt)+"_charge_"+str(iCharge)+"_RefLayer_"+refLayersNames[iRefLayer].replace('/','.')+".png"
@@ -207,7 +248,7 @@ def createButtons(mainWindow):
         button.pack()
         button.place(relx=0.7, rely=0.05+index*(0.95/nPtCodes), relwidth=0.35)
 
-    button= Tkinter.Button(mainWindow, wraplength=80, text="Toggle add mean dist. phi",bg="pale green",command=lambda :addMeanDistPhi())
+    button= Tkinter.Button(mainWindow, wraplength=80, text="Toggle add mean dist. phi",bg="pale green",command=lambda :toggleAddMeanDistPhi())
     button.pack()
     button.place(relx=0.7, rely=0.05+10*(0.95/nPtCodes), relwidth=0.3)
         
@@ -225,6 +266,10 @@ def main():
     #Load data from XML and saveto picled txt file
     patternsXMLFileName = "Patterns_0x0003.xml"
     connectionsXMLFileName = "hwToLogicLayer_0x0003.xml"
+    eventDataFileName = "TestData.xml"
+    
+    #readEventFromXML(eventDataFileName)
+    #return
 
     global layersNames
     global refLayersNames
