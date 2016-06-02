@@ -29,6 +29,8 @@
 <LayerMap hwName = "RE2/3"  hwNumber = "312"  logicNumber = "16" bendingLayer = "0" connectedToLayer="16"/>
 <LayerMap hwName = "RE3/3"  hwNumber = "313"  logicNumber = "17" bendingLayer = "0" connectedToLayer="17"/>
 
+layerToYValue = [10, 0, 11, 12, 2, 13, 14, 4]
+
 <RefLayerMap refLayer="0" logicNumber ="0"/>
 <RefLayerMap refLayer="1" logicNumber ="7"/>
 <RefLayerMap refLayer="2" logicNumber ="2"/>

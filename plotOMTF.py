@@ -6,6 +6,10 @@ import matplotlib.pyplot as pylab
 
 from scipy.ndimage.interpolation import shift
 
+from matplotlib.collections import PolyCollection
+from matplotlib.colors import colorConverter
+from mpl_toolkits.mplot3d import Axes3D
+
 import Tkinter
 ############################################
 ############################################
@@ -19,6 +23,7 @@ layerToPlot = [0,0,0,0,0,0,2,2,2,2,1,1,1,1,1,3,3,3]
 layerToMeanDistPhiPlot = [0,1,0,1,0,1,2,2,2,2,3,3,3,3,3,4,4,4]
 layerColors = ["b","g","r","c","m","y","b","g","r","c","m","b","g","r","c","b","g","r"]
 addMeanDistPhi = False
+plotTwoPt = False
 ############################################
 ############################################
 def parsePatternsXML(fname):
@@ -154,6 +159,11 @@ def toggleAddMeanDistPhi():
     addMeanDistPhi = not addMeanDistPhi
 ############################################
 ############################################
+def togglePlotTwoPt():
+    global plotTwoPt
+    plotTwoPt = not plotTwoPt
+############################################
+############################################
 def plotMeanDistPhi(iRefLayer):
 
     title = "Ref layer: "+refLayersNames[iRefLayer]
@@ -185,10 +195,15 @@ def plotMeanDistPhi(iRefLayer):
 ############################################
 def plotPtCode(iPt, iCharge, iRefLayer):
 
-    title = "PtCode = "+str(iPt)+" charge="+str(iCharge)+" ref layer: "+refLayersNames[iRefLayer]
-    f, axarr = pylab.subplots(4,sharex=True,sharey=True,num=title,figsize=(8,12))
+    if plotTwoPt:
+         plotTwoPtCodes(iPt, iCharge, iRefLayer)
+         return
 
     iChargeIndex = (iCharge+1)/2
+    
+    
+    title = "PtCode = "+str(iPt)+" charge="+str(iCharge)+" ref layer: "+refLayersNames[iRefLayer]
+    f, axarr = pylab.subplots(4,sharex=True,sharey=True,num=title,figsize=(8,12))
 
     for iLayer in xrange(0,18):
         if addMeanDistPhi:
@@ -207,9 +222,35 @@ def plotPtCode(iPt, iCharge, iRefLayer):
     pylab.savefig(fname)
     pylab.xlabel('bin number')
     pylab.ylabel('digitized pdf value')
+    pylab.show()
+############################################
+############################################
+def plotTwoPtCodes(iPt, iCharge, iRefLayer):
 
-    pylab.show() 
-           
+    iChargeIndex = (iCharge+1)/2
+    
+    yValues = range(0,11)
+    layerToYValue = [10, 0, 1, 11, 12, 2, 3, 13, 14, 4, 5]
+
+    title = "PtCode = "+str(iPt)+" charge="+str(iCharge)+" ref layer: "+refLayersNames[iRefLayer]
+    figure, axesArray = pylab.subplots(1,sharex=True,sharey=True,num=title,figsize=(8,12))
+    
+    for yValue in yValues:
+        iLayer = layerToYValue[yValue]
+        shiftedPdf = shift(pdfArray[iPt,iChargeIndex,iLayer,iRefLayer], meanDistPhiArray[iPt,iChargeIndex,iLayer,iRefLayer], cval=0)
+        shiftedPdf+=yValue*63
+        axesArray.plot(shiftedPdf,linewidth=5,color='red',label=layersNames[iLayer],drawstyle='steps-mid')
+        iPtSecond = 5*2+1
+        shiftedPdf = shift(pdfArray[iPtSecond,iChargeIndex,iLayer,iRefLayer], meanDistPhiArray[iPtSecond,iChargeIndex,iLayer,iRefLayer], cval=0)
+        shiftedPdf+=yValue*63
+        axesArray.plot(shiftedPdf,linewidth=5,color='blue',label=layersNames[iLayer],drawstyle='steps-mid')
+        axesArray.text(141, yValue*63+30, layersNames[iLayer])
+        
+    pylab.setp([a.get_xticklabels() for a in figure.axes[:-1]], visible=False)
+    pylab.xlabel('bin number')
+    pylab.title('')
+
+    pylab.show()
 ############################################
 ############################################
 def createButtons(mainWindow):
@@ -255,6 +296,10 @@ def createButtons(mainWindow):
     button= Tkinter.Button(mainWindow,wraplength=80, text="Plot mean dist. phi",bg="pale green",command=lambda :plotMeanDistPhi(iRefLayer))
     button.pack()
     button.place(relx=0.7, rely=0.05+12*(0.95/nPtCodes), relwidth=0.3)
+
+    button= Tkinter.Button(mainWindow, wraplength=80, text="Toggle plot two pt",bg="green",command=lambda :togglePlotTwoPt())
+    button.pack()
+    button.place(relx=0.7, rely=0.05+14*(0.95/nPtCodes), relwidth=0.3)
         
     button= Tkinter.Button(mainWindow,text="EXIT",bg="red",command=lambda: destroy(mainWindow))
     button.pack()
